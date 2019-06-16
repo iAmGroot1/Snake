@@ -1,0 +1,74 @@
+#initial code for the game
+
+import pygame
+pygame.init()
+
+win=pygame.display.set_mode((500,500))
+X = 250
+Y = 250
+width = 10
+height= 10
+MOVEX = 0
+MOVEY = 0
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+clock= pygame.time.Clock()
+
+
+run=True
+while run :
+    #pygame.time.delay(50)
+    for event in pygame.event.get():
+        if(event.type == pygame.QUIT):
+            run=False
+    keys = pygame.key.get_pressed()
+     
+    if keys[pygame.K_RIGHT]:
+        if MOVEX == 5 or MOVEX == 0  :
+             MOVEX=5
+             MOVEY=0
+        else :
+             MOVEX=-5
+             MOVEY=0
+
+    if keys[pygame.K_LEFT]: 
+        if MOVEX == -5 or MOVEX == 0  :
+             MOVEX=-5
+             MOVEY=0
+        else :
+             MOVEX=5
+             MOVEY=0
+
+    if keys[pygame.K_DOWN]: 
+        if MOVEY == 5 or MOVEY == 0  :
+             MOVEX=0
+             MOVEY=5
+        else :
+             MOVEX=0
+             MOVEY=-5
+             
+    if keys[pygame.K_UP]:
+        if MOVEY == -5 or MOVEY == 0  :
+             MOVEX=0
+             MOVEY=-5
+        else :
+             MOVEX=0
+             MOVEY=5
+             
+    if X+MOVEX >=495 or X-MOVEX <= 0 or Y-MOVEY <= 0 or Y+MOVEY >= 495 :
+         #GAME OVER 
+         quit()
+         MOVEY=0
+         MOVEX=0
+    X+=MOVEX 
+    Y+=MOVEY
+    win.fill(BLACK)
+    pygame.draw.rect(win,RED,(X,Y,width,height))
+    pygame.display.update()
+
+    clock.tick(90)
+
+pygame.quit()
+    
