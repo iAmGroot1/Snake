@@ -108,6 +108,14 @@ def Game():
                pygame.time.delay(50)
                quit()
 
+          for i in range(2,LENGTH):
+               if (X[0] >= X[i] and X[0] <= X[i]+20) :
+                    if (Y[0] >= Y[i] and Y[0] <= Y[i]+20):
+                         display_message('YOU LOSE HERE',RED)
+                         pygame.display.update()
+                         pygame.time.delay(50)
+                         quit()
+
           if(X[0]==APPLEX and Y[0]==APPLEY):
                LENGTH+=1
                APPLEX=randint(2,9)*(dis_width/10)
