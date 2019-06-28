@@ -12,6 +12,8 @@ X = dis_width/2
 Y = dis_height/2
 width = 10
 height= 10
+JUSTMOVER=False
+JUSTMOVEL=False
 MOVEX = 0
 MOVEY = 0
 BLACK = (0, 0, 0)
@@ -102,15 +104,19 @@ def Game():
                     MOVEX=0
                     MOVEY=30
                     
-          if X[0]+MOVEX >=LIMITX or X[0]-MOVEX <= 0 or Y[0]-MOVEY <= 0 or Y[0]+MOVEY >= LIMITY :
-               display_message('YOU LOSE',RED)
-               pygame.display.update()
-               pygame.time.delay(50)
-               quit()
-
+          if X[0]+MOVEX >LIMITX :
+               X[0]=0
+          elif X[0]-MOVEX < 0: 
+               X[0]=dis_width
+          elif Y[0]-MOVEY < 0:
+               Y[0]=dis_height 
+          elif Y[0]+MOVEY > LIMITY :
+               Y[0]=0
+          
           for i in range(2,LENGTH):
-               if (X[0] >= X[i] and X[0] <= X[i]+20) :
-                    if (Y[0] >= Y[i] and Y[0] <= Y[i]+20):
+               if (X[0] >= X[i] and X[0] < X[i]+30) :
+                    if (Y[0] >= Y[i] and Y[0] < Y[i]+30):
+                         print(X[0],X[i])
                          display_message('YOU LOSE HERE',RED)
                          pygame.display.update()
                          pygame.time.delay(50)
@@ -137,7 +143,7 @@ def Show(X,Y,LENGTH,MOVEX,MOVEY,rect,APPLEX,APPLEY,apple) :
           win.blit(rect,(X[i],Y[i]))
      win.blit(apple,(APPLEX,APPLEY))
 
-     pygame.time.delay(100)
+     pygame.time.delay(80)
      pygame.display.update()
 
 
